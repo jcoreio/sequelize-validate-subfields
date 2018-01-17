@@ -2,7 +2,7 @@
 
 import {ValidationError, ValidationErrorItem} from 'sequelize'
 
-type FieldValidation = {path: Array<string | number>, message: string}
+export type FieldValidation = {path: Array<string | number>, message: string}
 
 export function validateSubfields<T>(validator: (value: T) => Iterable<FieldValidation>): (value: T) => void {
   return function validateSubfields(value: T) {
