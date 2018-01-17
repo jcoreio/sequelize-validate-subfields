@@ -133,7 +133,7 @@ to the root of the attribute, instead of the root of the model instance.
 A Sequelize custom validator function that delegates to your `validator` function and combines any `FieldValidation`s
 it `yield`ed into the appropriate thrown error.
 
-## `flattenValidationErrors(error)`
+## `flattenValidationErrors(error, [options])`
 
 ```js
 const {flattenValidationErrors} = require('sequelize-validate-subfields')
@@ -144,6 +144,10 @@ const {flattenValidationErrors} = require('sequelize-validate-subfields')
 
 A `ValidationError` hich may contain zero or more `ValidationErrorItems` -- some may be from non-JSON field
 validation errors, and some may contain `FieldValidation`s from `validateSubfields`.
+
+#### `options?: {formatItemMessage?: (item: ValidationErrorItem) => string}`
+`formatItemMessage` allows you to override the error `message`s output for `ValidationErrorItem`s that don't
+contain `FieldValidation`s using your own custom function.
 
 ### Returns: `Array<FieldValidation>`
 A flattened array of `FieldValidation`s with `path`s relative to the root of the model instance instead of
