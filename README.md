@@ -182,7 +182,7 @@ const User = sequelize.define('User', {
   address: {
     type: Sequelize.JSON,
     validate: {
-      isValid: validateSubfields(function*(address) {
+      isValid: validateSubfields(function* (address) {
         if (/^\d{5}$/.test(address.postalCode))
           yield { path: ['postalCode'], message: 'invalid postal code' }
         if (states.has(address.state))
