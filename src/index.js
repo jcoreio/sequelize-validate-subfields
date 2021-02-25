@@ -21,9 +21,13 @@ type FlattenOptions = {
   formatItemMessage?: (item: ValidationErrorItem) => string,
 }
 
+function getOriginalError(item: ValidationErrorItem): Error | void {
+  return (item: any).original || (item: any).__raw
+}
+
 function defaultFormatItemMessage(item: ValidationErrorItem): string {
-  const { __raw } = (item: any)
-  return __raw ? __raw.message : item.message
+  const original = getOriginalError(item)
+  return original ? original.message : item.message
 }
 
 export function flattenValidationErrors(
@@ -35,9 +39,7 @@ export function flattenValidationErrors(
   const flattened: Array<FieldValidation> = []
   for (let item: ValidationErrorItem of error.errors) {
     const { path } = item
-    const { __raw } = (item: any)
-    const { validation } = __raw || {}
-    const { errors } = validation || {}
+    const errors = (getOriginalError(item): any)?.validation?.errors
     if (errors) {
       for (let { path: subpath, message } of errors) {
         flattened.push({ path: [path, ...subpath], message })
