@@ -1338,22 +1338,22 @@ declare module 'sequelize' {
    * Options provided when associating models with hasMany relationship
    * @see  Association class hasMany method
    */
-  declare export type AssociationOptionsHasMany = AssociationOptionsManyToMany & {
-    /**
-     * A string or a data type to represent the identifier in the table
-     */
-    keyType?: DataType,
-    ...
-  }
+  declare export type AssociationOptionsHasMany =
+    AssociationOptionsManyToMany & {
+      /**
+       * A string or a data type to represent the identifier in the table
+       */
+      keyType?: DataType,
+      ...
+    }
 
   /**
    * Options provided when associating models with belongsToMany relationship
    * @see  Association class belongsToMany method
    */
-  declare export type AssociationOptionsBelongsToMany<
-    Through: Model<any>
-  > = AssociationOptionsManyToMany & {
-    /**
+  declare export type AssociationOptionsBelongsToMany<Through: Model<any>> =
+    AssociationOptionsManyToMany & {
+      /**
     * The name of the table that is used to join source and target in n:m associations. Can also be a
     * sequelize
    model if you want to define the junction table yourself and add extra attributes to it.
@@ -1363,20 +1363,20 @@ declare module 'sequelize' {
     * @see  https://github.com/sequelize/sequelize/blob/v3.4.1/lib/associations/has-many.js
     * @see  https://github.com/sequelize/sequelize/blob/v3.4.1/lib/associations/belongs-to-many.js
    */
-    through: Class<Through> | string | ThroughOptions<Through>,
-    /**
+      through: Class<Through> | string | ThroughOptions<Through>,
+      /**
     * The name of the foreign key in the join table (representing the target model) or an object representing
     * the type definition for the other column (see `Sequelize.define` for syntax). When using an object, you
    can add a `name` property to set the name of the colum. Defaults to the name of target + primary key of
    target
    */
-    otherKey?: string | AssociationForeignKeyOptions,
-    /**
-     * Should the join model have timestamps
-     */
-    timestamps?: boolean,
-    ...
-  }
+      otherKey?: string | AssociationForeignKeyOptions,
+      /**
+       * Should the join model have timestamps
+       */
+      timestamps?: boolean,
+      ...
+    }
 
   /**
    * Used for a association table in n:m associations.
@@ -1492,7 +1492,8 @@ declare module 'sequelize' {
       TargetInitAttributes: Object,
       Target: Model<TargetAttributes, TargetInitAttributes>
     >
-    extends Association<Source, Target> {
+    extends Association<Source, Target>
+  {
     +associationType: 'BelongsTo';
     foreignKey: string;
     foreignKeyField: string;
@@ -1527,7 +1528,8 @@ declare module 'sequelize' {
       TargetInitAttributes: Object,
       Target: Model<TargetAttributes, TargetInitAttributes>
     >
-    extends Association<Source, Target> {
+    extends Association<Source, Target>
+  {
     +associationType: 'HasOne';
     foreignKey: string;
     foreignKeyField: string;
@@ -1562,7 +1564,8 @@ declare module 'sequelize' {
       TargetInitAttributes: Object,
       Target: Model<TargetAttributes, TargetInitAttributes>
     >
-    extends Association<Source, Target> {
+    extends Association<Source, Target>
+  {
     +associationType: 'HasMany';
     foreignKey: string;
     foreignKeyField: string;
@@ -1637,7 +1640,8 @@ declare module 'sequelize' {
       ThroughAttributes: Object,
       Through: Model<ThroughAttributes, any>
     >
-    extends Association<Source, Target> {
+    extends Association<Source, Target>
+  {
     +associationType: 'BelongsToMany';
     foreignKey: string;
     foreignKeyField: string;
